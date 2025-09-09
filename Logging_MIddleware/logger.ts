@@ -40,9 +40,7 @@ class LoggingMiddleware {
     this.sendToTestServer(logEntry);
   }
 
-  /**
-   * Convenience methods for different log levels
-   */
+  
   public info(stack: string, packageName: string, message: string, context?: any): void {
     this.Log(stack, 'info', packageName, message, context);
   }
@@ -63,9 +61,6 @@ class LoggingMiddleware {
     this.Log(stack, 'fatal', packageName, message, context);
   }
 
-  /**
-   * Handles backend and frontend errors as specified in requirements
-   */
   public logBackendError(handler: string, expectedType: string, receivedValue: any): void {
     const stack = this.getStackTrace();
     const message = `received ${typeof receivedValue}, expected ${expectedType}`;
@@ -78,13 +73,9 @@ class LoggingMiddleware {
     this.Log(stack, 'fatal', 'db', message, { operation, error });
   }
 
-  /**
-   * Internal method to add log to memory storage
-   */
+  
   private addLog(logEntry: LogEntry): void {
     this.logs.push(logEntry);
-
-    // Keep only the latest logs to prevent memory overflow
     if (this.logs.length > this.maxLogs) {
       this.logs = this.logs.slice(-this.maxLogs);
     }
@@ -93,12 +84,10 @@ class LoggingMiddleware {
     this.storeInSession(logEntry);
   }
 
-  /**
-   * Sends log to Test Server via API call
-   */
+
   private async sendToTestServer(logEntry: LogEntry): Promise<void> {
     try {
-      // Only attempt API call in browser environment
+      
       if (typeof window !== 'undefined') {
         const response = await fetch(this.testServerEndpoint, {
           method: 'POST',
@@ -109,7 +98,7 @@ class LoggingMiddleware {
         });
 
         if (!response.ok) {
-          // Log API failure to sessionStorage only (avoid recursion)
+          
           this.storeInSession({
             timestamp: new Date().toISOString(),
             stack: this.getStackTrace(),
@@ -121,7 +110,7 @@ class LoggingMiddleware {
         }
       }
     } catch (error) {
-      // Silently handle API errors to prevent application disruption
+      
       this.storeInSession({
         timestamp: new Date().toISOString(),
         stack: this.getStackTrace(),
@@ -133,9 +122,7 @@ class LoggingMiddleware {
     }
   }
 
-  /**
-   * Store logs in sessionStorage for debugging
-   */
+  
   private storeInSession(logEntry: LogEntry): void {
     if (typeof window !== 'undefined') {
       try {
@@ -155,9 +142,7 @@ class LoggingMiddleware {
     }
   }
 
-  /**
-   * Get current stack trace
-   */
+  
   private getStackTrace(): string {
     try {
       throw new Error();
@@ -180,9 +165,7 @@ class LoggingMiddleware {
     return [...this.logs];
   }
 
-  /**
-   * Clear all logs
-   */
+  
   public clearLogs(): void {
     this.logs = [];
     if (typeof window !== 'undefined') {
@@ -190,15 +173,13 @@ class LoggingMiddleware {
     }
   }
 
-  /**
-   * Set custom test server endpoint
-   */
+  
   public setTestServerEndpoint(endpoint: string): void {
     this.testServerEndpoint = endpoint;
   }
 }
 
-// Export singleton instance for reusable package
+
 export const logger = new LoggingMiddleware();
 
 // Export class for advanced usage
