@@ -7,7 +7,6 @@ A modern, full-featured URL shortening application built with Next.js, TypeScrip
 - ✨ **URL Shortening**: Convert long URLs into short, shareable links
 - 📊 **Analytics Dashboard**: Track and analyze URL usage statistics
 - 🎨 **Modern UI**: Clean, responsive interface built with Material-UI
-- 📱 **Mobile Responsive**: Fully responsive design for all devices
 - 🚀 **Fast Performance**: Built with Next.js for optimal performance
 - 🔗 **Simple Navigation**: Clean navigation between main features
 
@@ -151,10 +150,5 @@ The navigation component focuses on core functionality:
 ## Live Demo
 https://url-shortner-sable-ten.vercel.app/
 
-## Acknowledgments
-
-- [Material-UI](https://mui.com/) team for the excellent component library
-- [Next.js](https://nextjs.org/) team for the amazing React framework
-- [React](https://reactjs.org/) team for the powerful frontend framework
 
 ---
