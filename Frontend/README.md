@@ -149,8 +149,7 @@ The navigation component focuses on core functionality:
 - Focus on performance and simplicity
 
 ## Live Demo
-
-*Add your deployed application URL here*
+https://url-shortner-sable-ten.vercel.app/
 
 ## Acknowledgments
 

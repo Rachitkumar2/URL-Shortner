@@ -1,13 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: '/:shortcode',
-        destination: '/redirect/:shortcode',
-      },
-    ]
-  },
+  output: 'standalone',
+  trailingSlash: false,
+  experimental: {
+    esmExternals: true
+  }
 }
 
 module.exports = nextConfig
