@@ -7,6 +7,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'URL Shortener',
   description: 'A simple and efficient URL shortener application',
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({
@@ -16,6 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta name="generator" content="URL Shortener App" />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   )
